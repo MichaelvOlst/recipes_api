@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Recipe;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -46,5 +47,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+
+    public function recipes()
+    {
+        return $this->hasMany(Recipe::class);
     }
 }
