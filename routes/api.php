@@ -11,7 +11,7 @@ Route::post('register', [RegisterController::class, 'store']);
 Route::post('login', [LoginController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('user', [UserController::class, 'index']);
+    Route::get('user/me', [UserController::class, 'index']);
     Route::post('logout', [LogoutController::class, 'destroy']);
 
     Route::get('recipes', [RecipesController::class, 'index']);
