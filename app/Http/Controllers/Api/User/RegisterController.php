@@ -24,10 +24,10 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($attributes);
-
         $token = $user->createToken($request->device_name);
 
         return response([
+            'user' => new UserResource($user),
             'token' => $token->plainTextToken
         ], 201);
     }

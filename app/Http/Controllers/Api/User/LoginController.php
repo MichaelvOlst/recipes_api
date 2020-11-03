@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -34,6 +35,7 @@ class LoginController extends Controller
         }
     
         return response([
+            'user' => new UserResource($user),
             'token' => $user->createToken($request->device_name)->plainTextToken
         ], 201);
     }
