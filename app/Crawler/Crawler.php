@@ -20,7 +20,7 @@ class Crawler
 
         $this->crawler = new SymfonyCrawler($html);
 
-        dd($this->getTitle(), $this->getDescription(), $this->getImage());
+        // dd($this->getTitle(), $this->getDescription(), $this->getImage());
 
         return new CrawlerResponse(
             $this->getTitle(),
