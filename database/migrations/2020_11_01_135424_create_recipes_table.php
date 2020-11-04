@@ -18,7 +18,7 @@ class CreateRecipesTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title')->nullable();
             $table->string('image')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('url')->index();
             $table->bigInteger('likes')->nullable()->default(0)->index();
 
