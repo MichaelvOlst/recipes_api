@@ -8,9 +8,9 @@ use Symfony\Component\DomCrawler\Crawler as SymfonyCrawler;
 class Crawler
 {
     const TITLE_FILTER_PATH = "//meta[@property='og:title']";
-    const DESCRIPTION_FILTER_PATH = "//meta[@name='description']";
+    const DESCRIPTION_TAG_FILTER_PATH = "//meta[@name='description']";
     const IMAGE_FILTER_PATH = "//meta[@property='og:image']";
-
+    const DESCRIPTION_SOCIAL_FILTER_PATH = "//meta[@property='og:description']";
 
     protected SymfonyCrawler $crawler;
 
@@ -32,7 +32,7 @@ class Crawler
 
     protected function getTitle() : string
     {
-        $title = collect($this->crawler->filterXpath("//meta[@property='og:title']")->extract(['content']))->first();
+        $title = collect($this->crawler->filterXpath(self::TITLE_FILTER_PATH)->extract(['content']))->first();
         if(!$title) {
             $title = $this->crawler->filter('title')->text();
         }
@@ -43,8 +43,12 @@ class Crawler
 
     protected function getDescription()
     {
-        return collect($this->crawler->filterXpath(self::DESCRIPTION_FILTER_PATH)->extract(['content']))->first();
+        $description = collect($this->crawler->filterXpath(self::DESCRIPTION_TAG_FILTER_PATH)->extract(['content']))->first();
+        if(!$description) {
+           $description = collect($this->crawler->filterXpath(self::DESCRIPTION_SOCIAL_FILTER_PATH)->extract(['content']))->first();
+        }
 
+        return $description ?? "";
     }
 
 
