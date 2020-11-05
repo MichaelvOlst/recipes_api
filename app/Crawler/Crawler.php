@@ -56,10 +56,8 @@ class Crawler
     {
         $image = collect($this->crawler->filterXpath("//meta[@property='og:image']")->extract(['content']))->first();
         if(!$image) {
-            $image = $this->crawler->filter('img')->first()->extract(['src']);
+            $image = collect($this->crawler->filter('img')->first()->extract(['src']))->first();
         }
-
-        dd($image);
 
         return $image;
     }
