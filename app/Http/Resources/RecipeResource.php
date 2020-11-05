@@ -19,6 +19,7 @@ class RecipeResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
+            'url' => $this->url,
             'likes' => $this->likes ?? 0,
         ];
     }
