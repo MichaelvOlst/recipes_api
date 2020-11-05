@@ -59,6 +59,8 @@ class Crawler
             $image = $this->crawler->filter('img')->first()->extract(['src']);
         }
 
+        dd($image);
+
         return $image;
     }
 }
