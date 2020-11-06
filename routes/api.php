@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\User\LogoutController;
 use App\Http\Controllers\Api\User\RegisterController;
 use App\Http\Controllers\Api\Recipes\RecipesController;
 use App\Http\Controllers\Api\Recipes\RecipesLikesController;
+use App\Http\Controllers\Api\Recipes\RecipesImagesController;
 
 Route::post('register', [RegisterController::class, 'store']);
 Route::post('login', [LoginController::class, 'store']);
@@ -24,6 +25,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('recipes/{recipe}/like', [RecipesLikesController::class, 'update']);
     Route::delete('recipes/{recipe}/unlike', [RecipesLikesController::class, 'destroy']);
 
-    Route::put('recipes/{recipe}/image', [RecipesImagesController::class, 'index']);
-
+    Route::name('recipe.image.show')->get('recipes/{recipe}/image', [RecipesImagesController::class, 'show']);
 });

@@ -9,16 +9,14 @@ use App\Http\Resources\RecipeResource;
 class RecipesImagesController extends Controller
 {
    /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index(Recipe $recipe)
+    public function show(Recipe $recipe)
     {
-        dd($recipe);
-        // return RecipeResource::collection(
-        //     auth()->user()->recipes
-        // );
+        return new RecipeResource($recipe);
     }
 
 }
