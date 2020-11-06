@@ -65,6 +65,8 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
+        $this->authorize('update', $recipe);
+
         $this->validate($request, [
             'url' => 'required|url',
             'title' => 'required',
@@ -88,6 +90,8 @@ class RecipesController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+        $this->authorize('delete', $recipe);
+
         $recipe->delete();
 
         return response(['success' => true], 200);

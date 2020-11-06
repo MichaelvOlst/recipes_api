@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api\Recipes;
 
 use App\Models\Recipe;
-use Illuminate\Http\Request;
-use App\Events\RecipeCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecipeResource;
 
@@ -18,6 +16,8 @@ class RecipesLikesController extends Controller
      */
     public function store(Recipe $recipe)
     {
+        $this->authorize('update', $recipe);
+
         $recipe->increment('likes');
 
         return response(new RecipeResource($recipe->fresh()), 201);
@@ -31,6 +31,8 @@ class RecipesLikesController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+        $this->authorize('delete', $recipe);
+
         $recipe->decrement('likes');
 
         return response(new RecipeResource($recipe->fresh()), 201);
