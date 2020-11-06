@@ -16,7 +16,9 @@ class RecipesImagesController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        return new RecipeResource($recipe);
+        // return response()->file($recipe->image);
+
+        // return new RecipeResource($recipe);
     }
 
 }

@@ -24,6 +24,4 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::put('recipes/{recipe}/like', [RecipesLikesController::class, 'update']);
     Route::delete('recipes/{recipe}/unlike', [RecipesLikesController::class, 'destroy']);
-
-    Route::name('recipe.image.show')->get('recipes/{recipe}/image', [RecipesImagesController::class, 'show']);
 });
