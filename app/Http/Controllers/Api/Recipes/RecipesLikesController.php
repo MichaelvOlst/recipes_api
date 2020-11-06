@@ -9,12 +9,12 @@ use App\Http\Resources\RecipeResource;
 class RecipesLikesController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Update resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Recipe $recipe)
+    public function update(Recipe $recipe)
     {
         $this->authorize('update', $recipe);
 
