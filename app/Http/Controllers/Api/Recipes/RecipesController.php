@@ -67,7 +67,7 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        // return $request->all();
+        return $request->all();
 
         $this->authorize('update', $recipe);
 
@@ -81,11 +81,13 @@ class RecipesController extends Controller
         $recipe->title = $request->title;
         $recipe->description = $request->description;
 
-        if($request->has('image') && $request->has('imageBase64')) {
+        if($request->has('imageBase64')) {
             // Storage::delete(storage_path('app/'.$recipe->image));
 
-            $path = parse_url($request->image, PHP_URL_PATH);
-            $extension = pathinfo($path, PATHINFO_EXTENSION);
+            $extension = explode(
+                '/', 
+                mime_content_type($request->has('imageBase64'))
+            )[1];
             $filePath = 'recipes/'.Str::random(40).'.'.$extension;
             // Storage::put($filePath, $request->imageBase64);
 
