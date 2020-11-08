@@ -91,7 +91,7 @@ class RecipesController extends Controller
             $filePath = 'recipes/'.Str::random(40).'.'.$extension;
             // Storage::put($filePath, $request->imageBase64);
 
-            return [$path, $extension, $filePath, $request->imageBase64];
+            return [$extension, $filePath, $request->imageBase64];
 
             // $recipe->image = $filePath;
         }
