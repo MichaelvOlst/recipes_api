@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\Recipes;
 
 use App\Models\Recipe;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\RecipeCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecipeResource;
+use Illuminate\Support\Facades\Storage;
 
 class RecipesController extends Controller
 {
@@ -73,11 +75,18 @@ class RecipesController extends Controller
             'description' => 'required',
         ]);
 
-        $recipe->update([
-            'url' => $request->url,
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        $recipe->url = $request->url;
+        $recipe->title = $request->title;
+        $recipe->description = $request->description;
+
+        if($request->has('image') && $request->has('imageBase64')) {
+            Storage::delete(storage_path('app/'.$recipe->image));
+
+            $path = parse_url($request->image, PHP_URL_PATH);
+            $extension = pathinfo($path, PATHINFO_EXTENSION);
+            $filePath = 'recipes/'.Str::random(40).'.'.$extension;
+            Storage::put($filePath, $request->imageBase64);
+        }
 
         return response(new RecipeResource($recipe->fresh()), 200);
     }
