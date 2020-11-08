@@ -18,7 +18,7 @@ class RecipeResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => route('recipes.image', $this->id),
             'url' => $this->url,
             'likes' => $this->likes ?? 0,
         ];

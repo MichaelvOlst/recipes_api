@@ -10,6 +10,18 @@ class RecipePolicy
 {
     use HandlesAuthorization;
 
+     /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Recipe  $recipe
+     * @return mixed
+     */
+    public function show(User $user, Recipe $recipe)
+    {
+        return $user->id === $recipe->user_id;
+    }
+
     /**
      * Determine whether the user can update the model.
      *

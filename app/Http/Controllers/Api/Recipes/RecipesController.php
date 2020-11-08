@@ -31,7 +31,7 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'url' => 'required|url|unique:recipes,url',
+            // 'url' => 'required|url|unique:recipes,url',
         ]);
 
         $recipe = auth()->user()->recipes()->create([

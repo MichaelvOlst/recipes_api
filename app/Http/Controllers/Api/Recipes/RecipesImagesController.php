@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Recipes;
 
 use App\Models\Recipe;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RecipeResource;
 
 class RecipesImagesController extends Controller
 {
@@ -16,9 +15,9 @@ class RecipesImagesController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        // return response()->file($recipe->image);
+        $this->authorize('show', $recipe);
 
-        // return new RecipeResource($recipe);
+        return response()->file(storage_path('app/'.$recipe->image));
     }
 
 }
