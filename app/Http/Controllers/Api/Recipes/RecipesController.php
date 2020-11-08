@@ -67,7 +67,7 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        return $request->all();
+        // return $request->all();
 
         $this->authorize('update', $recipe);
 
