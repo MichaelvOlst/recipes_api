@@ -15,8 +15,6 @@ class RecipesImagesController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        $this->authorize('show', $recipe);
-
         return response()->file(storage_path('app/'.$recipe->image));
     }
 
