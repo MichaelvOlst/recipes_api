@@ -67,7 +67,7 @@ class RecipesController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        return $request->all();
+        // return $request->all();
 
         $this->authorize('update', $recipe);
 
@@ -89,7 +89,7 @@ class RecipesController extends Controller
             $filePath = 'recipes/'.Str::random(40).'.'.$extension;
             // Storage::put($filePath, $request->imageBase64);
 
-            dd($path, $extension, $filePath, $request->imageBase64);
+            return [$path, $extension, $filePath, $request->imageBase64];
 
             // $recipe->image = $filePath;
         }
