@@ -86,7 +86,9 @@ class RecipesController extends Controller
 
             $extension = explode(
                 '/', 
-                mime_content_type($request->has('imageBase64'))
+                mime_content_type(
+                    base64_encode($request->has('imageBase64'))
+                )
             )[1];
             $filePath = 'recipes/'.Str::random(40).'.'.$extension;
             // Storage::put($filePath, $request->imageBase64);
