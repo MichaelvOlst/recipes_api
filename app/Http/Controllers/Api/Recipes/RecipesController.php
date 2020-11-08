@@ -79,7 +79,7 @@ class RecipesController extends Controller
         $recipe->title = $request->title;
         $recipe->description = $request->description;
 
-        if($request->has('imageBase64')) {
+        if($request->imageBase64 !== null) {
             Storage::delete(storage_path('app/'.$recipe->image));
 
             $image_parts = explode(";base64,", $request->imageBase64);
