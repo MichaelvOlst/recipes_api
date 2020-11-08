@@ -82,10 +82,17 @@ class RecipesController extends Controller
         if($request->imageBase64 !== null) {
             Storage::delete(storage_path('app/'.$recipe->image));
 
-            $image_parts = explode(";base64,", $request->imageBase64);
-            $extension = explode('/', mime_content_type($request->imageBase64))[1];
-            $filePath = 'recipes/'.Str::random(40).'.'.$extension;
-            Storage::put($filePath, base64_decode($image_parts[1]));
+            if($request->web) {
+                $image_parts = explode(";base64,", $request->imageBase64);
+                $extension = explode('/', mime_content_type($request->imageBase64))[1];
+                $filePath = 'recipes/'.Str::random(40).'.'.$extension;
+                Storage::put($filePath, base64_decode($image_parts[1]));
+            } else {
+                $path = parse_url($request->image, PHP_URL_PATH);
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
+                $filePath = 'recipes/'.Str::random(40).'.'.$extension;
+                Storage::put($filePath, base64_decode($request->imageBase64));
+            }   
             
             $recipe->image = $filePath;
         }
