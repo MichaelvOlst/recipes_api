@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Categories\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\User\LoginController;
@@ -24,6 +25,14 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::put('recipes/{recipe}/like', [RecipesLikesController::class, 'update']);
     Route::delete('recipes/{recipe}/unlike', [RecipesLikesController::class, 'destroy']);
+
+
+    Route::get('categories', [CategoriesController::class, 'index']);
+    Route::post('categories', [CategoriesController::class, 'store']);
+    Route::get('categories/{recipe}', [CategoriesController::class, 'show']);
+    Route::put('categories/{recipe}', [CategoriesController::class, 'update']);
+    Route::delete('categories/{recipe}', [CategoriesController::class, 'destroy']);
+
 });
 
 Route::name('recipes.image')->get('recipes/{recipe}/image', [RecipesImagesController::class, 'show']);

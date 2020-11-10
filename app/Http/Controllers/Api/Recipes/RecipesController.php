@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api\Recipes;
 
 use App\Models\Recipe;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\RecipeCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecipeResource;
-use Illuminate\Support\Facades\Storage;
 
 class RecipesController extends Controller
 {
