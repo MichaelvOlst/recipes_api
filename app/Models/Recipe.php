@@ -23,7 +23,10 @@ class Recipe extends Model
 
     public function updateImage(Request $request)
     {
+        Storage::delete(storage_path('app/'.$this->image));
+       
         if($request->imageBase64 === null) {
+            $this->image = null;
             return;
         }
 
