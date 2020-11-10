@@ -18,7 +18,7 @@ class RecipeResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => route('recipes.image', $this->id).'?'.$this->updated_at->timestamp,
+            'image' => $this->image ? route('recipes.image', $this->id).'?'.$this->updated_at->timestamp : null,
             'url' => $this->url,
             'likes' => $this->likes ?? 0,
         ];
