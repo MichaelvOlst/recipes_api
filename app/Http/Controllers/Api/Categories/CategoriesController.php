@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\Categories;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 
 class CategoriesController extends Controller
 {
@@ -14,7 +16,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return CategoryResource::collection(
+            auth()->user()->categories
+        );
     }
 
     /**
@@ -25,7 +29,16 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
+
+        $category = auth()->user()->categories()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return response(new CategoryResource($category), 201);
     }
 
     /**
@@ -34,9 +47,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return new CategoryResource($category);
     }
 
     /**
@@ -46,9 +59,20 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $this->authorize('update', $category);
+
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
+
+        $category->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return response(new CategoryResource($category->fresh()), 200);
     }
 
     /**
@@ -57,8 +81,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $this->authorize('delete', $category);
+
+        $category->delete();
+
+        return response(['success' => true], 200);
     }
 }

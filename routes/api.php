@@ -26,12 +26,11 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('recipes/{recipe}/like', [RecipesLikesController::class, 'update']);
     Route::delete('recipes/{recipe}/unlike', [RecipesLikesController::class, 'destroy']);
 
-
     Route::get('categories', [CategoriesController::class, 'index']);
     Route::post('categories', [CategoriesController::class, 'store']);
-    Route::get('categories/{recipe}', [CategoriesController::class, 'show']);
-    Route::put('categories/{recipe}', [CategoriesController::class, 'update']);
-    Route::delete('categories/{recipe}', [CategoriesController::class, 'destroy']);
+    Route::get('categories/{category}', [CategoriesController::class, 'show']);
+    Route::put('categories/{category}', [CategoriesController::class, 'update']);
+    Route::delete('categories/{category}', [CategoriesController::class, 'destroy']);
 
 });
 
