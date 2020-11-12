@@ -18,7 +18,7 @@ class RecipesController extends Controller
     public function index()
     {
         return RecipeResource::collection(
-            auth()->user()->recipes
+            auth()->user()->recipes()->with('categories')->get()
         );
     }
 
