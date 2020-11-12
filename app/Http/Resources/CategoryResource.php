@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             // 'recipes' => RecipeResource::collection($this->recipes),
-            'recipes' => $this->recipes->count(),
+            'recipes_count' => $this->recipes->count(),
             'updated_at' => $this->updated_at->diffForHumans(),
             'created_at' => $this->created_at->diffForHumans(),
         ];
