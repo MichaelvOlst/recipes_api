@@ -43,6 +43,7 @@ Trait UpdateImage
     protected function getBase64FromWeb($base64Image)
     {
         $image_parts = explode(";base64,", $base64Image);
+        print_r($image_parts);
         // $extension = explode('/', mime_content_type($base64Image))[1];
         $extension = substr($base64Image, 5, strpos($base64Image, ';')-5);
 
