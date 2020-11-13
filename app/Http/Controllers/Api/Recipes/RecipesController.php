@@ -79,6 +79,11 @@ class RecipesController extends Controller
         $recipe->updateImage($request);
         $recipe->save();
 
+        if($request->categories) {
+            $recipe->categories()->sync( (array) $request->categories );
+        }
+
+
         return response(new RecipeResource($recipe->fresh()), 200);
     }
 
