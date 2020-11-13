@@ -78,10 +78,8 @@ class RecipesController extends Controller
         $recipe->description = $request->description;
         $recipe->save();
 
-        if($request->categories) {
-            $recipe->categories()->sync( (array) $request->categories );
-        }
-
+        $recipe->categories()->sync( (array) $request->categories );
+        
         return response(new RecipeResource($recipe->fresh()), 200);
     }
 
