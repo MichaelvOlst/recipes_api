@@ -31,8 +31,8 @@ class RecipesImagesController extends Controller
     {
         $this->authorize('update', $recipe);
 
-        return $request->all();
-        
+        // return $request->all();
+
         $recipe->updateImage($request);
 
         return response(['success' => true], 200);
