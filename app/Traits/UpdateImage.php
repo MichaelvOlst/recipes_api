@@ -44,8 +44,6 @@ Trait UpdateImage
     {
         $image_parts = explode(";base64,", $base64Image);
         $extension = explode('/', mime_content_type($base64Image))[1];
-        
-        dump($extension);
 
         return [base64_decode($image_parts[1]), $extension];
     }
