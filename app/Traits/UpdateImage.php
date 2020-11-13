@@ -11,13 +11,6 @@ Trait UpdateImage
     public function updateImage(Request $request)
     {
         Storage::delete(storage_path('app/'.$this->image));
-       
-        if($request->imageBase64 === null) {
-            $this->image = null;
-            return;
-        }
-
-        Storage::delete(storage_path('app/'.$this->image));
 
         if($request->web) {
             [$fileContent, $extension] = $this->getBase64FromWeb($request->imageBase64);
@@ -28,8 +21,16 @@ Trait UpdateImage
         $filePath = $this->generatePath($extension);
         Storage::put($filePath, $fileContent);
         $this->image = $filePath;
+        $this->save();
+    }
 
-        return $filePath;
+
+    public function deleteImage()
+    {
+        Storage::delete(storage_path('app/'.$this->image));
+       
+        $this->image = null;
+        $this->save(); 
     }
 
 

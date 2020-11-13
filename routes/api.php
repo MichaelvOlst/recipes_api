@@ -26,6 +26,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('recipes/{recipe}/like', [RecipesLikesController::class, 'update']);
     Route::delete('recipes/{recipe}/unlike', [RecipesLikesController::class, 'destroy']);
 
+    Route::put('recipes/{recipe}/image', [RecipesImagesController::class, 'update']);
+    Route::delete('recipes/{recipe}/image', [RecipesImagesController::class, 'destroy']);
+
     Route::get('categories', [CategoriesController::class, 'index']);
     Route::post('categories', [CategoriesController::class, 'store']);
     Route::get('categories/{category}', [CategoriesController::class, 'show']);

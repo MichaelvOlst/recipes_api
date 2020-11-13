@@ -76,7 +76,6 @@ class RecipesController extends Controller
         $recipe->url = $request->url;
         $recipe->title = $request->title;
         $recipe->description = $request->description;
-        $recipe->updateImage($request);
         $recipe->save();
 
         if($request->categories) {
