@@ -17,7 +17,9 @@ class CategoriesController extends Controller
     public function index()
     {
         return CategoryResource::collection(
-            auth()->user()->categories()->with('recipes')->get()
+            auth()->user()->categories()->with('recipes')
+                ->orderBy('title', 'asc')
+                ->get()
         );
     }
 
