@@ -83,7 +83,6 @@ class RecipesController extends Controller
             $recipe->categories()->sync( (array) $request->categories );
         }
 
-
         return response(new RecipeResource($recipe->fresh()), 200);
     }
 
