@@ -15,10 +15,18 @@ class RecipesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $recipes = auth()->user()->recipes()->with('categories');
+
+        if($request->category) {
+            $recipes->whereHas('categories', function($q) use ($request) {
+                $q->where('category_id', $request->category);
+            });
+        }
+
         return RecipeResource::collection(
-            auth()->user()->recipes()->with('categories')->get()
+            $recipes->get()
         );
     }
 
